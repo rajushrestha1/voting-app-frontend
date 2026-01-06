@@ -105,7 +105,6 @@ console.error('Login error:', error);
           <ResultsChart data={results} />
           
           <div className="mt-8">
-            {/* Group results by party and render separate tables */}
             {(() => {
               const grouped = results.reduce((acc, c) => {
                 const party = c.party || 'Independent';
@@ -117,7 +116,6 @@ console.error('Login error:', error);
               const totalVotesAll = results.reduce((sum, c) => sum + (c.votes || 0), 0);
 
               return Object.keys(grouped).map((party) => {
-                // Sort candidates by votes (descending) within each party
                 const items = (grouped[party] || []).slice().sort((a, b) => (b.votes || 0) - (a.votes || 0));
                 const totalVotesParty = items.reduce((s, it) => s + (it.votes || 0), 0);
 

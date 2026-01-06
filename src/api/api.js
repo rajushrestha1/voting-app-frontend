@@ -5,9 +5,7 @@ const API = axios.create({
   withCredentials: true,
 });
 
-// ====================
-// STUDENT ENDPOINTS
-// ====================
+
 export const studentLogin = (studentId) =>
   API.post('/auth/login', { studentId });
 
@@ -17,13 +15,10 @@ export const studentLogout = () =>
 export const castVote = (voteData) =>
   API.post('/vote', voteData);
 
-// Bulk candidate votes (submit multiple candidate IDs in one request)
 export const castBulkVote = (candidateIds) =>
   API.post('/vote/bulk', { candidateIds });
 
-// ====================
-// ADMIN ENDPOINTS
-// ====================
+
 export const adminLogin = (credentials) =>
   API.post('/admin/login', credentials);
 
@@ -42,31 +37,23 @@ export const getCandidates = () =>
 export const getResults = () =>
   API.get('/admin/results');
 
-// ====================
-// PUBLIC ENDPOINTS
-// ====================
+
 export const getPublicCandidates = () =>
   API.get('/public/candidates');
 
-// ====================
-// FACE RECOGNITION ENDPOINTS
-// ====================
 
-// Register face (upload multiple images + student info)
 export const faceRegister = (formData) =>
   API.post('/auth/face/register', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-// Face login (upload single image)
+
 export const faceLogin = (formData) =>
   API.post('/auth/face/login', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-// ====================
-// COMBINED FACE + STUDENT LOGIN
-// ====================
+
 export const faceStudentLogin = (studentId, imageFile) => {
   const formData = new FormData();
   formData.append('studentId', studentId);
@@ -77,9 +64,6 @@ export const faceStudentLogin = (studentId, imageFile) => {
   });
 };
 
-// ====================
-// CURRENT USER
-// ====================
 export const getCurrentUser = () =>
   API.get('/me');
 

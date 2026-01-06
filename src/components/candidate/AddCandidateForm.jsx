@@ -5,7 +5,7 @@ const AddCandidateForm = ({ onSubmit, onCancel }) => {
     name: '',
     party: '',
     position: 'President',
-    image: null, // Add image to state
+    image: null, 
   });
 
   const handleChange = (e) => {
@@ -20,14 +20,13 @@ const AddCandidateForm = ({ onSubmit, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Use FormData for image and text fields
   const data = new FormData();
 data.append('name', formData.name);
 data.append('party', formData.party);
 data.append('position', formData.position);
-data.append('image', formData.image); // ← correct
+data.append('image', formData.image); 
 
-onSubmit(data); // ← parent sends this via axios/fetch with content-type multipart/form-data
+onSubmit(data);
   }
 
   return (

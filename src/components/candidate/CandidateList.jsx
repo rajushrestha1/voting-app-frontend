@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const CandidateList = ({ candidates, onRemove }) => {
-  const BASE_URL = 'http://localhost:5000'; // Change to your backend URL in production
+  const BASE_URL = 'http://localhost:5000'; 
 
   return (
     <div className="overflow-x-auto">
@@ -25,7 +25,7 @@ const CandidateList = ({ candidates, onRemove }) => {
                   src={
                     candidate.image
                       ? `${BASE_URL}${candidate.image}`
-                      : '/default-avatar.png' // Optional fallback image
+                      : '/default-avatar.png' 
                   }
                   alt={candidate.name}
                   className="w-16 h-16 object-cover rounded-full border"

@@ -1,16 +1,15 @@
-// ...existing code...
 import React, { useState } from 'react';
 import { faceRegister } from '../api/api';
 
 export default function Register() {
   const [name, setName] = useState('');
-  const [studentId, setStudentId] = useState(''); // NEW
+  const [studentId, setStudentId] = useState(''); 
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState('');
 
   const handleFileChange = (e) => {
-    setFiles(Array.from(e.target.files).slice(0, 4)); // max 4 images
+    setFiles(Array.from(e.target.files).slice(0, 4)); 
   };
 
   const handleSubmit = async (e) => {
@@ -30,16 +29,16 @@ export default function Register() {
 
       const formData = new FormData();
       formData.append('name', name);
-      if (studentId.trim()) formData.append('studentId', studentId.trim()); // NEW
+      if (studentId.trim()) formData.append('studentId', studentId.trim()); 
 
-      // Append each file using the same field name as expected in backend
+      
       files.forEach((file) => formData.append('images', file));
 
       const { data } = await faceRegister(formData);
 
       setMsg(data?.message || 'Registered successfully');
       setName('');
-      setStudentId(''); // NEW
+      setStudentId(''); 
       setFiles([]);
     } catch (err) {
       console.error('Registration failed:', err?.response?.data?.message || err.message);
@@ -95,9 +94,8 @@ export default function Register() {
           </button>
         </form>
 
-        {msg && <p className="text-center text-red-500 mt-2">{msg}</p>}
+        {msg && <p className="text-center text-green-500 mt-2">{msg}</p>}
       </div>
     </div>
   );
 }
-// ...existing code...

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
-// import toast from 'react-hot-toast';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const AuthContext = createContext();
@@ -9,14 +8,11 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  // split student/admin states to match ProtectedRoute expectations
   const [student, setStudent] = useState(null);
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  /** ------------------------
-   *  FACE LOGIN
-   *  ------------------------ */
+  
   const faceLogin = async (imageFile) => {
     try {
       const formData = new FormData();
@@ -37,13 +33,11 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Face not recognized');
       }
 
-      // Map backend user to frontend user state
       const loggedInUser = {
         userId: response.data.user?._id,
         name: response.data.user?.name || 'Unknown'
       };
 
-      // For face-only login treat as generic user
       setUser(loggedInUser);
       return loggedInUser;
 
@@ -53,9 +47,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  /** ------------------------
-   *  FACE + STUDENT LOGIN
-   *  ------------------------ */
+  
   const faceStudentLogin = async (studentId, imageFile) => {
     try {
       const formData = new FormData();
@@ -84,7 +76,6 @@ export const AuthProvider = ({ children }) => {
         hasVoted: !!response.data.hasVoted,
       };
 
-      // set both generic user and student for compatibility
       setUser({ studentId: loggedInStudent.studentId, name: loggedInStudent.name });
       setStudent(loggedInStudent);
       return loggedInStudent;
@@ -95,13 +86,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  /** ------------------------
-   *  STUDENT LOGIN
-   *  ------------------------ */
+  
   const studentLogin = async (studentId) => {
     try {
       const response = await axios.post(
-        // backend auth route is exposed at /auth/login
         `${API_URL}/auth/login`,
         { studentId },
         { withCredentials: true }
@@ -124,7 +112,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // NEW: admin login
   const loginAdmin = async (credentials) => {
     try {
       const response = await axios.post(
@@ -132,7 +119,6 @@ export const AuthProvider = ({ children }) => {
         credentials,
         { withCredentials: true }
       );
-      // minimal admin state; expand if backend returns admin info
       setAdmin({ username: credentials.username });
       return response.data;
     } catch (error) {
@@ -140,7 +126,6 @@ export const AuthProvider = ({ children }) => {
       throw new Error(error.response?.data?.message || 'Invalid server response');
     }
   };
-  // NEW: admin logout
   const logoutAdmin = async () => {
     try {
       await axios.post(`${API_URL}/admin/logout`, {}, { withCredentials: true });
@@ -149,7 +134,6 @@ export const AuthProvider = ({ children }) => {
       console.error('Admin logout error:', error);
     }
   };
-  // FIXED: student logout (use correct backend route)
   const logoutStudent = async () => {
     try {
       await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
@@ -161,9 +145,7 @@ export const AuthProvider = ({ children }) => {
   };
 
 
-  /** ------------------------
-   *  LOGOUT
-   *  ------------------------ */
+  
   const logout = async () => {
     try {
       await axios.post(`${API_URL}/auth/student/logout`, {}, { withCredentials: true });
@@ -188,9 +170,9 @@ export const AuthProvider = ({ children }) => {
         faceLogin,
         faceStudentLogin,
         studentLogin,
-        loginAdmin,       // <-- exported
-        logoutAdmin,      // <-- exported
-        logoutStudent,    // <-- exported
+        loginAdmin,       
+        logoutAdmin,      
+        logoutStudent,    
         logout
       }}
     >

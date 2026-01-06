@@ -1,5 +1,4 @@
 
-// CandidateCard.jsx
 import React from 'react';
 
 const CandidateCard = ({ candidate, onVoteClick, hasVoted }) => {

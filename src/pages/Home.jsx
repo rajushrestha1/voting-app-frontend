@@ -7,11 +7,10 @@ const Home = () => {
     <>
       <div
         className="w-full h-screen flex items-center justify-center bg-cover bg-center px-6 lg:px-16"
-          style={{ backgroundImage: `url(/Images/e-voting.png)`, backgroundSize: 'cover', // Ensures the image covers the entire container
+          style={{ backgroundImage: `url(/Images/e-voting.png)`, backgroundSize: 'cover', 
           backgroundPosition: 'center', }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-6xl items-center">
-          {/* Left Section: Text & CTA */}
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold text-gray-900 ">
               Student Voting System
@@ -35,9 +34,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Right Section: Image */}
           <div className="">
-            {/* This area is empty, as the image is already applied to the background */}
           </div>
         </div>
       </div>

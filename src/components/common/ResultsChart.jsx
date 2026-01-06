@@ -5,7 +5,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultsChart = ({ data }) => {
-  //  Sort candidates by votes descending
   const sortedData = [...data].sort((a, b) => b.votes - a.votes);
 
   const chartData = {
@@ -33,7 +32,6 @@ const ResultsChart = ({ data }) => {
       },
     ],
   };
-
   const options = {
     plugins: {
       legend: {

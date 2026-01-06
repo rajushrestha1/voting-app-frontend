@@ -57,7 +57,6 @@ const LoginForm = () => {
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {/* Student ID input */}
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="studentId" className="sr-only">
@@ -76,7 +75,6 @@ const LoginForm = () => {
             </div>
           </div>
 
-          {/* Webcam capture */}
           <div className="mt-4">
             <WebcamCapture onCapture={setFaceImage} />
             {faceMatched === false && (
@@ -95,7 +93,6 @@ const LoginForm = () => {
             )}
           </div>
 
-          {/* Submit button */}
           <div>
             <button
               type="submit"

@@ -27,33 +27,33 @@ const About = () => {
         </p>
       </div>
       
-       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+       {/* <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
         <p className="text-gray-700 mb-4">
-          CampusVote aims to revolutionize student elections by providing a secure, transparent, and accessible online voting platform.
+          Student Voting System
         </p>
       </div>
       
        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
         <p className="text-gray-700 mb-4">
-          CampusVote aims to revolutionize student elections by providing a secure, transparent, and accessible online voting platform.
+          Student Voting System
         </p>
       </div>
       
        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
         <p className="text-gray-700 mb-4">
-          CampusVote aims to revolutionize student elections by providing a secure, transparent, and accessible online voting platform.
+          Student Voting System
         </p>
       </div>
       
        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
         <p className="text-gray-700 mb-4">
-          CampusVote aims to revolutionize student elections by providing a secure, transparent, and accessible online voting platform.
+          Student Voting System
         </p>
-      </div>
+      </div> */}
       
      
     </div>

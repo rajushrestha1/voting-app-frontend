@@ -43,11 +43,9 @@ const StudentDashboard = () => {
     };
 
     fetchCandidates();
-      // Set initial voting step based on student's existing votes
       try {
         const votedFor = student.votedFor || {};
         if (student.hasVoted) {
-          // Already completed all votes
           setStep('Completed');
         } else if (votedFor.president && !votedFor.VicePresident) {
           setStep('Vice President');
@@ -88,7 +86,6 @@ const StudentDashboard = () => {
     try {
       if (step === 'President' && votes.President) {
         console.log('Submitting vote for President:', votes.President._id);
-        // **Send position with vote**
         await castVote({ candidateId: votes.President._id, position: 'president' });
         setStep('Vice President');
         setShowConfirmation(false);
@@ -100,14 +97,11 @@ const StudentDashboard = () => {
       } else if (step === 'Candidate' && votes.Candidate.length > 0) {
         const candidateIds = votes.Candidate.map(c => c._id);
         console.log('Submitting final candidate votes:', candidateIds);
-        // Submit all candidate votes in a single request to avoid duplicate/race errors
         await castBulkVote(candidateIds);
-        // Update local state/storage
         localStorage.setItem('student', JSON.stringify({ ...student, hasVoted: true }));
         toast.success('All votes submitted successfully!');
 
         console.log('[StudentDashboard] castBulkVote succeeded, now calling logoutStudent()');
-        // Log the student out and redirect to login page
         try {
           await logoutStudent();
           console.log('[StudentDashboard] logoutStudent() completed successfully');
@@ -121,20 +115,16 @@ const StudentDashboard = () => {
         navigate('/login');
       }
     } catch (error) {
-      // Log full response (if available) to make server error visible in browser console
       console.error('Vote submission error:', error, 'response:', error?.response?.data);
       const serverMessage = error?.response?.data?.message;
 
-      // Handle server-side validation that indicates the user already voted for this position
       if (serverMessage === 'Already voted for President') {
         toast.success('You already voted for President. Moving to Vice President.');
         setShowConfirmation(false);
         setStep('Vice President');
-        // Refresh student state from server
         try {
           const resp = await getCurrentStudent();
           if (resp.data && resp.data.user) {
-            // map backend's student shape to frontend student state if possible
             const updated = {
               studentId: resp.data.user.studentId || student.studentId,
               name: resp.data.user.name || student.name,
@@ -170,7 +160,6 @@ const StudentDashboard = () => {
         return;
       }
 
-      // Generic handling for other errors
       const message = serverMessage || error?.message || 'Failed to submit vote';
       toast.error(message);
     }
@@ -223,11 +212,10 @@ const StudentDashboard = () => {
         </div>
       )}
 
-      {/* Pass step (position) prop to VoteConfirmation */}
       {showConfirmation && step !== 'Candidate' && (
         <VoteConfirmation
           candidate={votes[step]}
-          position={step}           // <--- Added this line
+          position={step}           
           onConfirm={confirmVote}
           onCancel={() => setShowConfirmation(false)}
         />
